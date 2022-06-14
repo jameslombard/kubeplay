@@ -1,4 +1,4 @@
-# Test cluster with kind
+# Kind: Tool for spinning up local Kubernetes test clusters
 
 - kind: https://kind.sigs.k8s.io/
 - Install with yay -S kind-bin
