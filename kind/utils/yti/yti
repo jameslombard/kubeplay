@@ -1,0 +1,85 @@
+#! /bin/bash 
+
+# Read input var: 
+# Accepted values:
+# - update: Updates the yti text file
+# - add:  Adds current ytii file to daily.md
+input=$1 
+
+# Create Array
+# From file:
+readarray -t yti_Array < _YTI_
+readarray -t bl_Array < _BL_
+# readarray -t yti_Array < _YTI_TEST
+
+if [[ $input == "add" ]] ; then printf "%s\n" "${yti_Array[@]}" >> ../daily.md ; fi
+
+if [[ $input == "update" ]] ; then 
+# Check size:
+# echo size=${#yti_Array[@]}
+
+  # Find the start of the Y,T, I & BL sections:
+  for i in ${!yti_Array[@]}; do
+    # echo "element $i is ${yti_Array[$i]}" 
+    if [[ ${yti_Array[$i]} == *'- Y:'* ]] ; then iY=$i ; fi
+    if [[ ${yti_Array[$i]} == *'- T:'* ]] ; then iT=$i ; fi
+    if [[ ${yti_Array[$i]} == *'- I:'* ]] ; then iI=$i ; fi
+    if [[ ${yti_Array[$i]} == *'- BL:'* ]] ; then iBL=$i ; fi
+  done
+
+  # Marker Locations:
+  # echo $iY
+  # echo $iT
+  # echo $iI
+  # echo $iBL
+
+  # Create Y,T & I arrays:
+  # Note: A[@] returns the contents of the array, :1:2 takes a slice of length 2, starting at index 1.
+  Yarray=("${yti_Array[@]:0:$iT}")
+  Tarray=("${yti_Array[@]:$iT:$iI-$iT}")
+  Iarray=("${yti_Array[@]:$iI}")
+
+  # Check size of arrays:
+  # Ysize=("${#Yarray[@]}")
+  # Tsize=("${#Tarray[@]}")
+  # Isize=("${#Iarray[@]}")
+  # echo $Ysize
+  # echo $Tsize
+  # echo $Isize
+
+  # Build newY:
+  newY=()
+  count=0
+  for i in ${!Yarray[@]} ; do
+    # echo "element $i is ${Tarray[$i]}"
+    if [[ ${Yarray[$i]} != *'[x]'* ]] ; then newY[count]=${Yarray[$i]} ; ((count++)); fi
+  done
+
+  newYsize=${#newY[@]}
+
+  # Build newT and update newY:
+  newT=()
+  count=0
+  for i in ${!Tarray[@]} ; do
+  # echo "i is $i"
+  # echo "countT is $countT"
+  # echo "newYsize is $newYsize"
+  # echo "element $i is ${Tarray[$i]}"
+    if [[ ${Tarray[$i]} == *'[x]'* ]] ; then newY[newYsize]=${Tarray[$i]}  ; ((newYsize++)) ; else newT[count]=${Tarray[$i]}  ; ((count++)) ; fi
+  done
+
+  newTsize=${#newT[@]}
+
+  # Build newT from BL:
+  newBL=()
+  count=0
+  for i in ${!bl_Array[@]} ; do
+    if [[ ${bl_Array[$i]} == *'[-]'* ]] ; then newT[newTsize]=${bl_Array[$i]}  ; ((newTsize++)) ; else newBL[count]=${bl_Array[$i]}  ; ((count++)) ; fi
+  done
+
+  # Print new YTI:
+  YTI=("${newY[@]}" "${newT[@]}" "${Iarray[@]}")
+  printf "%s\n" "${YTI[@]}" > _YTI_ ;
+  printf "%s\n" "${newBL[@]}" > _BL_ ;
+  # printf "%s\n" "${YTI[@]}" > ytest ;
+fi

@@ -1,0 +1,21 @@
+- Y:
+- T:
+Logius:
+- Jira board: helmchart refactor ; emiel tickets ; test acc1, acc3 deployments ; acc2
+- Infra overview =>
+  - Picard / Solvinity / Terraform
+- Some PI planning  
+- App infra overview [-]
+- Internal code versioning [-]
+- VDI connection to LPC [-]
+- Manual foundation and runner deployments [-]
+- Test connections to the different environments [-]
+- M3 & M4 => blue-green [-]
+- Velero / Cert-manager / Istio [-]
+Admin 
+  - Driver's license [-]
+  - Health and Medical Admin [-]
+  - Leave [-]
+  - Pension stuff [-]
+  - Tinder [-]
+- I: 

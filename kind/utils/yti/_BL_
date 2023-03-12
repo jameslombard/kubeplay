@@ -1,0 +1,36 @@
+- BL:
+  Expense claims: 
+  General Admin:
+  Finances: 
+  - Budget & Spreadsheet []
+  - ABNamro []
+  - Financial advisor []
+  - Tax []
+  - 30% ruling vs. Mobility allowance []
+  Correspondences: 
+  - Aldirt []
+  - Rikus []
+  - David []
+  Gigsafe:
+  - Nginx Proxy & Gitlab []
+  - Gigsafe autodeploy []
+  Homelab:
+  - Move all NB data to external hard-drives []
+  - Install Proxmox []
+  - Configure shared-storage and disks []
+  - Configure dev environment for building Media-server []
+  - Clonezilla for backup, migration and restore of VMs []
+  - Dockercompose, portainer, Nginx proxy, etc => Start designing an architecture based on containerised applications []
+  Jambiguous: 
+  - Godaddy & Linode []
+  - Blog []
+  Courses:
+  - CKAD []
+  - Linux []
+  - Azure []
+  Logius:
+  - Nexus and JDK/JRE multistage build []
+  - Helmchart repo _library to foundation charts []
+  - Dutch []
+  
+

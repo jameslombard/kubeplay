@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    ingress.kubernetes.io/ssl-redirect: "false"
+    kubernetes.io/ingress.allow-http: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  name: demoapp
+spec:
+  rules:
+  - host: demo.com
+    http:
+      paths:
+      - backend:
+          serviceName: demoapp
+          servicePort: 80
+        path: /api/v1
+  #tls:
+  #- hosts:
+  #  - demoapp.com
+  #  secretName: secret-tls-ssl
